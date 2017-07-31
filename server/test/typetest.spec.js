@@ -8,7 +8,7 @@ describe('Test code for correct output', function()
     
          it ('Test whether the output of viewfavourite  is an object or not', function(done) 
          {
-             expect(typeof movieControl.viewfavourite).to.deep.equal('object');    
+             expect(typeof movieControl.a).to.deep.equal('object');    
              done();   
              }); 
               it ('Test whether the output of saving new user  is an object or not', function(done) 
