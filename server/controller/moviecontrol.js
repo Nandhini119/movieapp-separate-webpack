@@ -1,6 +1,8 @@
 let movieschema = require('../models/movie');
 
 let request = require('request');
+let viewfav = {};
+
 
 module.exports = {
 
@@ -42,6 +44,18 @@ module.exports = {
             if (err)
                 throw err;
             else {
+                viewfav = data;
+                res.status(200).send(data);
+            }
+        });
+        return viewfav;
+    },
+     viewallfavourite: function(req, res) {
+        movieschema.find( function(err, data) {
+            if (err)
+                throw err;
+            else {
+
                 res.status(200).send(data);
             }
         });
@@ -58,8 +72,12 @@ module.exports = {
             if (err)
                 throw err;
             else {
+                status = true;
                 res.status(200).send("success");
             }
         });
-    }
+    },
+    
+    a : viewfav
+   
 };

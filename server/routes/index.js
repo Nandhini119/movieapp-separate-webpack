@@ -10,6 +10,7 @@ module.exports = function(passport) {
     router.get('/logout', loginControl.logout);
     router.post('/movie/add', movieSearch.favourite);
     router.get('/movie/view', movieSearch.viewfavourite);
+     router.get('/movie/viewall', movieSearch.viewallfavourite);
     router.get('/movie/delete', movieSearch.delfavourite);
 
     return router;

@@ -1,6 +1,6 @@
 let loginschema = require('../models/signup');
-
-let loginControl = {
+let authenuser = {};
+module.exports = {
 
     logout: function(req, res) {
 
@@ -38,7 +38,7 @@ let loginControl = {
 
                 var db = new loginschema(newUser);
                 db.save().then((doc) => {
-
+                    authenuser = data;
                     res.send(doc);
                 }, (err) => {
                     res.send(err);
@@ -47,8 +47,9 @@ let loginControl = {
                 res.send(200);
             }
         });
-        var db = new loginschema(newUser);
+        return authenuser;
         
-    }
+    },
+    a:authenuser
 };
-module.exports = loginControl;
+

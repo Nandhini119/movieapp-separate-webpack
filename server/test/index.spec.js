@@ -10,8 +10,8 @@ var signupStub = sinon.stub(signup, 'findOne');
 var app = require('../index.js');
 var address = request("http://localhost:3000");
  
-describe('Test my controller', function() {
-  /*  describe('Find items', function() {
+  describe('Test my controller', function() {
+  /*describe('Find items', function() {
         beforeEach(function() {
             modelStub.yields(null, [{
                 'title': 'Baahubali 2: The Conclusion',
@@ -33,15 +33,16 @@ describe('Test my controller', function() {
     });
 */
 
-    describe('Finds the user in Database ', function() {
-        beforeEach(function() {
+    describe('Finds the user in Database ', function(done) {
+        beforeEach(function(done) {
            signupStub.withArgs({email:'nandhini@gmail.com'}).returns({'firstname':'nandhini'});
         });
-        it('Matches the User', function(done) {
+        it('Matches the User', function(err) {
             request(app)
                 .post('/authen/signup')
                 .expect(200)
                 .end(function(err, res) {
+                    console.log(res.body);
                     if (err) return done(err);
                     //Enter your assertions here 
                    expect(signupStub({email:'nandhini@gmail.com'}).firstname).to.be.equal('nandhini'); 
