@@ -1,13 +1,12 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Paper from 'material-ui/Paper';
+import {Paper,TextField,RaisedButton} from 'material-ui/Paper';
 import {Row,Col} from 'react-flexbox-grid';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
 import {blueGrey100} from 'material-ui/styles/colors';
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
 import Route from './../../congifroute/routes.js';
+
 const style = {
 paperstyle : {margin: '80px',textAlign : 'center',
 backgroundColor : blueGrey100},

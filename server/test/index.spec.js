@@ -10,28 +10,30 @@ var signupStub = sinon.stub(signup, 'findOne');
 var app = require('../index.js');
 var address = request("http://localhost:3000");
  
-  describe('Test my controller', function() {
-  /*describe('Find items', function() {
+  /*describe('Test my controller', function() {
+  describe('Find items', function() {
         beforeEach(function() {
             modelStub.yields(null, [{
-                'title': 'Baahubali 2: The Conclusion',
-                'poster': 'http://image.tmdb.org/t/p/w185//sXf30F2HFpsFPXlNz7jp0ySSV9I.jpg',
-                'release_date': '2017-04-27'
+                'email':'nandhini@gmail.com',
+                'firstname':'nandhini'
+                
             }]);
         });
         it('should attempt to find items', function(done) {
             request(app)
-                .get('/movie/view')
+                .post('/authen/signup')
                 .expect(200)
                 .end(function(err, res) {
-                    if (err) return done(err);
+                    console.log(res.body);
+                    if (err) 
+                    return done(err);
                     //Enter your assertions here           
-                    expect(res.body[0].title).to.be.equal("Baahubali 2: The Conclusion");
+                    expect(res.body[0].firstname).to.be.equal("nandhini");
                     done();
                 });
         });
     });
-*/
+
 
     describe('Finds the user in Database ', function(done) {
         beforeEach(function(done) {
@@ -50,4 +52,4 @@ var address = request("http://localhost:3000");
                 });
         });
     });
-});
+});*/

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-//import {browserHistory,Router,Route} from 'react-router';
 import Login from'./components/login/Login.js';
-import Home from './components/Home.js';
-import Search from './components/Search.js';
+import Home from './components/movie/Home.js';
 import Signup from './components/signup/Signup.js';
 
 

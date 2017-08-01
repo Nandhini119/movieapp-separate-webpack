@@ -1,26 +1,13 @@
-import React, {
-    PropTypes
-}
-from 'react';
+import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Paper from 'material-ui/Paper';
-import {
-    Row, Col
-}
-from 'react-flexbox-grid';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-import {
-    teal100
-}
-from 'material-ui/styles/colors';
-import {
-    Link, Redirect
-}
-from 'react-router-dom';
+import {Paper,TextField,RaisedButton} from 'material-ui';
+import {Row, Col} from 'react-flexbox-grid';
+import {teal100} from 'material-ui/styles/colors';
+import {Link, Redirect} from 'react-router-dom';
 import $ from 'jquery';
-import Home from '../Home.js';
+import Home from '../movie/Home.js';
 import Route from './../../congifroute/routes.js';
+
 const style = {
     paperstyle: {
         margin: '50px',

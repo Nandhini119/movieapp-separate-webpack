@@ -1,22 +1,16 @@
 import React from 'react'; 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
- import AppBar from 'material-ui/AppBar';
- import RaisedButton from 'material-ui/RaisedButton';
- import { teal500, teal100, teal50 } from 'material-ui/styles/colors';
- import Drawer from 'material-ui/Drawer'; 
-import MenuItem from 'material-ui/MenuItem';
+import {AppBar,RaisedButton,Drawer,MenuItem,
+        TextField,FlatButton,Dialog,AutoComplete} from 'material-ui';
+import { teal500, teal100, teal50 } from 'material-ui/styles/colors';
 import injectTapEventPlugin from 'react-tap-event-plugin';
- import {     Link, Redirect } from 'react-router-dom';
- import {     Row, Col } from 'react-flexbox-grid';
- import TextField from 'material-ui/TextField';
- import FlatButton from 'material-ui/FlatButton';
- import Dialog from 'material-ui/Dialog';
- import $ from 'jquery';
- import SearchData from './Search.js';
- import DisplayData from './display.js';
- import AutoComplete from 'material-ui/AutoComplete';
- import Route from './../congifroute/routes.js';
- import Login from './login/Login.js';
+import {Link, Redirect } from 'react-router-dom';
+import {Row, Col } from 'react-flexbox-grid';
+import $ from 'jquery';
+import SearchData from './Search.js';
+import DisplayData from './display.js';
+import Route from './../../congifroute/routes.js';
+
  injectTapEventPlugin();
  
  const style = {
