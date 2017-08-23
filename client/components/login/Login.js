@@ -132,11 +132,10 @@ class Login extends React.Component {
                     < Redirect to = '/home' > < /Redirect>:''
             }
 
-            {
-                /*<Link to = "/signup">
+            <Link to = "/signup">
                           <RaisedButton label="Signup" primary={true} style={style.raisedstyle} />
-                        </Link>*/
-            } < /Paper> < /Col> < /Row>
+                        </Link>
+             < /Paper> < /Col> < /Row>
 
             < /MuiThemeProvider>
         );

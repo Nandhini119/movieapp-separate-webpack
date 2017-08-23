@@ -34,6 +34,11 @@ app.use(express.static(path.join(__dirname, '../', 'dist/')));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+
+app.get('/signup', (req, res) => {
+   res.send('Express received GET /signup'); 
+});
+
 // Initialize Passport
 var initPassport = require('./controller/authenticate/init');
 initPassport(passport);

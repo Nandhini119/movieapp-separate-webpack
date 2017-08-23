@@ -12,7 +12,7 @@ paperstyle : {margin: '80px',textAlign : 'center',
 backgroundColor : blueGrey100},
 raisedstyle : {margin : '12'}
 }
-class Signup extends React.Component
+/*class Signup extends React.Component
 {
 constructor()
 {
@@ -94,5 +94,13 @@ return(
 </MuiThemeProvider>
 );
 }
+}*/
+
+class Signup extends React.Component {
+    render() {
+        return (
+            <div>This is the Signup Page</div>
+        );
+    }
 }
 export default Signup;

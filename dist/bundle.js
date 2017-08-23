@@ -25348,10 +25348,12 @@ var style = {
     },
     dialogstyle: {
         textAlign: 'center'
-    } };
+    }
+};
 var menuProps = {
     desktop: true,
-    disableAutoFocus: true };
+    disableAutoFocus: true
+};
 var mov = [];
 
 var Home = function (_React$Component) {
@@ -25381,6 +25383,7 @@ var Home = function (_React$Component) {
         _this.displayFavouriteList = _this.displayFavouriteList.bind(_this);
         return _this;
     }
+
     /*opens dialog box and ask for movie name*/
 
 
@@ -25405,6 +25408,8 @@ var Home = function (_React$Component) {
             this.setState({ drawer: false });
             this.setState({ open: false });
         }
+        /* adds the movie data to database which carries data to controller*/
+
     }, {
         key: 'addMovieToFavouriteList',
         value: function addMovieToFavouriteList(movie) {
@@ -25430,17 +25435,22 @@ var Home = function (_React$Component) {
                 }
             });
         }
+        /*displays favourite list of the user who logged in.takes email as data to 
+          controller to display movie list of that particular user*/
+
     }, {
         key: 'displayFavouriteList',
         value: function displayFavouriteList() {
             this.setState({ drawer: false });
             var moviedatas = '';
+            /*assigning this of the class to a temporary variable to be used inside ajax call*/
             var object = this;
             _jquery2.default.ajax({
                 url: _routes2.default.moviedisplay,
                 type: 'GET',
                 data: { email: localStorage.getItem("email") },
                 success: function success(response) {
+                    /*the response is iterated and sent to display.js to be displayed in card*/
                     moviedatas = response.map(function (moviedata) {
                         return _react2.default.createElement(_display2.default, { movie: moviedata,
                             deleteMovieFromFavList: object.deleteMovieFromFavList.bind(object) });
@@ -25452,16 +25462,21 @@ var Home = function (_React$Component) {
                 }
             });
         }
+        /*deletes movie from the favourite list*/
+
     }, {
         key: 'deleteMovieFromFavList',
         value: function deleteMovieFromFavList(movie) {
+            /*assigning this of the class to a temporary variable to be used inside ajax call*/
             var object = this;
             _jquery2.default.ajax({
                 url: _routes2.default.moviedelete,
                 type: 'GET',
-                data: { title: movie.movietitle, email: localStorage.getItem("email") },
+                data: { title: movie.movietitle,
+                    email: localStorage.getItem("email") },
                 success: function success(response) {
                     alert("movie successfully deleted from favourite list");
+                    /*to auto display the favourite list after deleting the movie the function display is again called*/
                     object.displayFavouriteList();
                 },
                 error: function error(err) {
@@ -25469,13 +25484,13 @@ var Home = function (_React$Component) {
                 }
             });
         }
-
         /****to fetch data from tmdb api for suggestion ***/
 
     }, {
         key: 'handleChangeSuggest',
         value: function handleChangeSuggest(name) {
             var suggest = [];
+            /*assigning this of the class to a temporary variable to be used inside ajax call*/
             var object = this;
             this.setState({ moviename: name });
             _jquery2.default.ajax({
@@ -25493,11 +25508,14 @@ var Home = function (_React$Component) {
                 error: function error(response) {}
             });
         }
+        /*search for movies from tmdb api*/
+
     }, {
         key: 'getMovieNamefromUser',
         value: function getMovieNamefromUser() {
             this.setState({ open: false });
             var moviedatas = '';
+            /*assigning this of the class to a temporary variable to be used inside ajax call*/
             var object = this;
             var movie = this.state.moviename;
             if (movie.length === 0) {
@@ -25512,6 +25530,7 @@ var Home = function (_React$Component) {
                             alert("there is no such movie..Please enter correct name");
                         } else {
                             moviedatas = response.results.map(function (moviedata) {
+                                /*the response is iterated and sent to search.js to be displayed in card*/
                                 return _react2.default.createElement(_Search2.default, { movie: moviedata,
                                     addMovieToFavouriteList: object.addMovieToFavouriteList.bind(object) });
                             });
@@ -25524,9 +25543,12 @@ var Home = function (_React$Component) {
                 });
             }
         }
+        /*to destroy the session of the user logout route is called and flag is set and redirected*/
+
     }, {
         key: 'handlelogout',
         value: function handlelogout() {
+            /*assigning this of the class to a temporary variable to be used inside ajax call*/
             var obj = this;
             _jquery2.default.ajax({
                 url: _routes2.default.logout,
@@ -25554,8 +25576,7 @@ var Home = function (_React$Component) {
                 _react2.default.createElement(
                     'div',
                     null,
-                    _react2.default.createElement(_materialUi.AppBar, { style: style.appbarstyle,
-                        title: 'Movie Ground',
+                    _react2.default.createElement(_materialUi.AppBar, { style: style.appbarstyle, title: 'Movie Ground',
                         onLeftIconButtonTouchTap: this.handleToggle,
                         iconElementRight: _react2.default.createElement(_materialUi.FlatButton, { label: 'Logout',
                             onClick: this.handlelogout.bind(this) }) }),
@@ -35786,7 +35807,7 @@ var App = function (_Component) {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        _reactRouterDom.BrowserRouter,
+        _reactRouterDom.HashRouter,
         null,
         _react2.default.createElement(
           'div',
@@ -35977,7 +35998,11 @@ var Login = function (_React$Component) {
                                 { to: '/home' },
                                 ' '
                             ) : '',
-                            ' '
+                            _react2.default.createElement(
+                                _reactRouterDom.Link,
+                                { to: '/signup' },
+                                _react2.default.createElement(_materialUi.RaisedButton, { label: 'Signup', primary: true, style: style.raisedstyle })
+                            )
                         ),
                         ' '
                     ),
@@ -36402,99 +36427,107 @@ var style = {
   paperstyle: { margin: '80px', textAlign: 'center',
     backgroundColor: _colors.blueGrey100 },
   raisedstyle: { margin: '12' }
-};
+  /*class Signup extends React.Component
+  {
+  constructor()
+  {
+  super();
+  this.state = {firstname : "",lastname : "",password : "",email : ""};
+  }
+  handleFnameChange(e)
+  {
+  var firstname = e.target.value;
+  this.setState({firstname : firstname});
+  }
+  handleLnameChange(e)
+  {
+  var lastname = e.target.value;
+  this.setState({lastname : lastname});
+  }
+  handleEmailChange(e)
+  {
+  var email = e.target.value;
+  this.setState({email : email});
+  }
+  handlePasswordChange(e)
+  {
+  var password = e.target.value;
+  this.setState({password : password});
+  }
+  
+  handleregister()
+  {
+  if(this.state.email.length == 0 || this.state.password.length == 0)
+  {
+  alert("email or password field should not be empty");
+  }
+  else
+  {
+  $.ajax({
+  url : Route.signup,
+  type : 'POST',
+  data : {
+  firstname : this.state.firstname,
+  lastname : this.state.lastname,
+  username : this.state.email,
+  password : this.state.password
+  },
+  success : function(response)
+  {
+  alert("successfully registered");
+  
+  },
+  error : function(err)
+  {
+  alert("error in signup");
+  
+  }
+  })
+  }
+  }
+  render()
+  {
+  return(
+  <MuiThemeProvider>
+    <Row around='xs'>
+      <Col center='xs' xs = {8} md = {6}>
+        <Paper style = {style.paperstyle} zDepth={4}>
+          <TextField  floatingLabelText="Firstname"  floatingLabelFixed={true}  onChange = {this.handleFnameChange.bind(this)}/>
+          <br />
+          <TextField  floatingLabelText="Lastname" floatingLabelFixed={true} onChange = {this.handleLnameChange.bind(this)}/>
+          <br />
+          <TextField  floatingLabelText="Email" floatingLabelFixed={true} type="email" onChange = {this.handleEmailChange.bind(this)}/>
+          <br />
+          <TextField  floatingLabelText="Password" floatingLabelFixed={true} type="password" onChange = {this.handlePasswordChange.bind(this)}/>
+          <br/>
+          <Link to = "/">
+            <RaisedButton label="Register" onClick = {this.handleregister.bind(this)} primary={true} style={style.raisedstyle} />
+          </Link>
+        </Paper>
+      </Col>
+    </Row>
+  </MuiThemeProvider>
+  );
+  }
+  }*/
 
+};
 var Signup = function (_React$Component) {
   _inherits(Signup, _React$Component);
 
   function Signup() {
     _classCallCheck(this, Signup);
 
-    var _this = _possibleConstructorReturn(this, (Signup.__proto__ || Object.getPrototypeOf(Signup)).call(this));
-
-    _this.state = { firstname: "", lastname: "", password: "", email: "" };
-    return _this;
+    return _possibleConstructorReturn(this, (Signup.__proto__ || Object.getPrototypeOf(Signup)).apply(this, arguments));
   }
 
   _createClass(Signup, [{
-    key: 'handleFnameChange',
-    value: function handleFnameChange(e) {
-      var firstname = e.target.value;
-      this.setState({ firstname: firstname });
-    }
-  }, {
-    key: 'handleLnameChange',
-    value: function handleLnameChange(e) {
-      var lastname = e.target.value;
-      this.setState({ lastname: lastname });
-    }
-  }, {
-    key: 'handleEmailChange',
-    value: function handleEmailChange(e) {
-      var email = e.target.value;
-      this.setState({ email: email });
-    }
-  }, {
-    key: 'handlePasswordChange',
-    value: function handlePasswordChange(e) {
-      var password = e.target.value;
-      this.setState({ password: password });
-    }
-  }, {
-    key: 'handleregister',
-    value: function handleregister() {
-      if (this.state.email.length == 0 || this.state.password.length == 0) {
-        alert("email or password field should not be empty");
-      } else {
-        _jquery2.default.ajax({
-          url: _routes2.default.signup,
-          type: 'POST',
-          data: {
-            firstname: this.state.firstname,
-            lastname: this.state.lastname,
-            username: this.state.email,
-            password: this.state.password
-          },
-          success: function success(response) {
-            alert("successfully registered");
-          },
-          error: function error(err) {
-            alert("error in signup");
-          }
-        });
-      }
-    }
-  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        _MuiThemeProvider2.default,
+        'div',
         null,
-        _react2.default.createElement(
-          _reactFlexboxGrid.Row,
-          { around: 'xs' },
-          _react2.default.createElement(
-            _reactFlexboxGrid.Col,
-            { center: 'xs', xs: 8, md: 6 },
-            _react2.default.createElement(
-              _Paper.Paper,
-              { style: style.paperstyle, zDepth: 4 },
-              _react2.default.createElement(_Paper.TextField, { floatingLabelText: 'Firstname', floatingLabelFixed: true, onChange: this.handleFnameChange.bind(this) }),
-              _react2.default.createElement('br', null),
-              _react2.default.createElement(_Paper.TextField, { floatingLabelText: 'Lastname', floatingLabelFixed: true, onChange: this.handleLnameChange.bind(this) }),
-              _react2.default.createElement('br', null),
-              _react2.default.createElement(_Paper.TextField, { floatingLabelText: 'Email', floatingLabelFixed: true, type: 'email', onChange: this.handleEmailChange.bind(this) }),
-              _react2.default.createElement('br', null),
-              _react2.default.createElement(_Paper.TextField, { floatingLabelText: 'Password', floatingLabelFixed: true, type: 'password', onChange: this.handlePasswordChange.bind(this) }),
-              _react2.default.createElement('br', null),
-              _react2.default.createElement(
-                _reactRouterDom.Link,
-                { to: '/' },
-                _react2.default.createElement(_Paper.RaisedButton, { label: 'Register', onClick: this.handleregister.bind(this), primary: true, style: style.raisedstyle })
-              )
-            )
-          )
-        )
+        'This is the Signup Page'
       );
     }
   }]);
